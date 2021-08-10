@@ -11,7 +11,9 @@ import Title from './Title';
 
 class Header extends ε.Component {
 
-  render() {}
+  render() {
+    console.log('Hello');
+  }
 }
 
 export default Header;
