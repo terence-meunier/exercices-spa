@@ -9,7 +9,9 @@ class App extends ε.Component {
   //     <div>
   //       <Header />
   //     </div>
-  render() {}
+  render() {
+    return ε.generate('div', [], [ε.generate(Header, [], [])])
+  }
 }
 
 export default App;

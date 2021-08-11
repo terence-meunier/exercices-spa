@@ -1,7 +1,9 @@
 import * as ε from './tools/ε';
-import Header from './components/Header';
+import App from './components/App';
 
 
 // Point d'entré de votre site.
 
-ε.start(Header, document.getElementById('root'));
+const app = new App();
+console.log(app.render());
+// ε.start(App, document.getElementById('root'));
