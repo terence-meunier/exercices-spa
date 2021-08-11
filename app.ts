@@ -5,5 +5,6 @@ import App from './components/App';
 // Point d'entré de votre site.
 
 const app = new App();
-console.log(app.render());
-// ε.start(App, document.getElementById('root'));
+const virtualDOM = app.render();
+const DOM = ε.ElementToHTML(virtualDOM);
+ε.start(DOM, document.getElementById('root'));

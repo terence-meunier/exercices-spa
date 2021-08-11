@@ -6,9 +6,7 @@ abstract class Component {
 }
 
 function start(rootComponent, rootHtml: HTMLElement): void {
-  const rootInstance = new rootComponent();
-  const rootRender = rootInstance.render();
-  console.log(rootInstance);
+  rootHtml.appendChild(rootComponent);
 }
 
 function generate(tagName, attributes, children): Element {
@@ -27,8 +25,43 @@ function generate(tagName, attributes, children): Element {
   )
 }
 
+function ElementToHTML(element): HTMLElement {
+
+  // Création de la balise HTML selon le tagName de l'élement du DOM Virtuel
+  const elt = document.createElement(element.tagName);
+
+  // Si l'élement du DOM possède des attributs
+  if (element.attributes.length !== 0) {
+    element.attributes.forEach((attribute) => {
+      for (const [key, value] of Object.entries(attribute)) {
+        // On les ajoute un par un à la balise HTML
+        if (key === 'className') {
+          elt.setAttribute('class', value);
+        } else {
+          elt.setAttribute(key, value);
+        }        
+      };
+    });
+  }
+
+  // Si il y a des enfants dans l'élement du DOM Virtuel on les ajoute à la balise HTML
+  // En rappellant la fonction ElementToHTML (Appel récursif)
+  if (element.children.length !== 0) {
+    element.children.forEach((child) => {
+      if (typeof child === 'string') {
+        elt.textContent = child;
+      } else {
+        elt.appendChild(ElementToHTML(child));
+      }
+    });
+  }
+
+  return elt;
+}
+
 export {
   Component,
   generate,
-  start
+  start,
+  ElementToHTML
 };
