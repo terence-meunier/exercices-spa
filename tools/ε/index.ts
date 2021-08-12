@@ -2,13 +2,13 @@ import { Element } from './frameworkTypes';
 
 // parent class for components
 abstract class Component {
-  
+
   public states: string;
 
   constructor(props) {
     this.states = props;
   }
-  
+
   abstract render(): Element
 
   setState(data) {
@@ -60,7 +60,7 @@ function ElementToHTML(element): HTMLElement {
           elt.setAttribute('class', value);
         } else {
           elt.setAttribute(key, value);
-        }        
+        }
       };
     });
   }
@@ -90,5 +90,5 @@ export {
   Component,
   generate,
   start,
-  ElementToHTML 
+  ElementToHTML
 };

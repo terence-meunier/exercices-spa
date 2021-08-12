@@ -1,3 +1,5 @@
+import inputFieldObservable from '../tools/observables/inputFieldObservable';
+import inputFieldObservable2 from '../tools/observables/inputFieldObservable2';
 import * as ε from '../tools/ε/';
 
 // import components
@@ -11,16 +13,21 @@ import Title from './Title';
 
 class Header extends ε.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return ε.generate(
       'div',
       [
         {
-          className: 'w-full flex justify-center items-center border-2 bg-gray-300'
+          className: 'w-full justify-center items-center border-2 bg-gray-300'
         }
       ],
       [
-        ε.generate(Title, [], [], { texte: 'HELLO WORLD' })
+        ε.generate('div', [], [ε.generate(Title, [], [], { texte: 'HELLO WORLD', observables: [inputFieldObservable] })]),
+        ε.generate('div', [], [ε.generate(Title, [], [], { texte: 'HELLO WORLD', observables: [inputFieldObservable2] })])
       ]);
   }
 }

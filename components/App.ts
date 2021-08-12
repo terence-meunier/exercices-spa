@@ -10,6 +10,11 @@ class App extends ε.Component {
   //     <div>
   //       <Header />
   //     </div>
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return ε.generate(
       'div',
@@ -17,7 +22,11 @@ class App extends ε.Component {
       [
         ε.generate(Header, [], []),
         ε.generate('label', [{for: 'mon-input'}], ['Changer le titre : ']),
-        ε.generate(Input, [], [])
+        ε.generate(Input, [], [], {id: 'mon-input'}),
+        ε.generate('br', [], []),
+        ε.generate('br', [], []),
+        ε.generate('label', [{for: 'mon-input-2'}], ['Changer le titre : ']),
+        ε.generate(Input, [], [], {id: 'mon-input-2'})
       ]);
   }
 }

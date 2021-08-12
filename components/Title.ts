@@ -5,9 +5,11 @@ class Title extends ε.Component {
 
   constructor(props) {
     super(props);
-    
-    inputFieldObservable.registerObserver(data => {
-      this.update(data);
+
+    this.states.observables.forEach((observable) => {
+      observable.registerObserver(data => {
+        this.update(data);
+      });
     });
   }
 
