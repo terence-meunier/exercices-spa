@@ -3,11 +3,12 @@ import inputFieldObservable from '../tools/observables/inputFieldObservable';
 
 class Title extends ε.Component {
 
-  public states: string;
-
   constructor(props) {
-    super();
-    this.states = props;
+    super(props);
+    
+    inputFieldObservable.registerObserver(data => {
+      this.update(data);
+    });
   }
 
   update(data) {
@@ -15,11 +16,6 @@ class Title extends ε.Component {
   }
 
   render() {
-
-    inputFieldObservable.registerObserver(data => {
-      this.update(data);
-    });
-
     return ε.generate('h1', [{ type: 'h1' }], [this.states.texte], this.states);
   }
 }

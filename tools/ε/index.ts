@@ -2,18 +2,28 @@ import { Element } from './frameworkTypes';
 
 // parent class for components
 abstract class Component {
+  
+  public states: string;
+
+  constructor(props) {
+    this.states = props;
+  }
+  
   abstract render(): Element
 
   setState(data) {
     for (const [key, value] of Object.entries(data)) {
-      const selector = `*[${key}="${this.states[key]}"]`;
-      reconciliation(selector, value);
+      reconciliation(key, this.states[key], value);
+      this.states[key] = value;
     }
   }
 }
 
-function reconciliation(selector, value) {
-  document.querySelector(selector).textContent = value;
+function reconciliation(key, oldValue, newValue) {
+  const selector = `*[${key}="${oldValue}"]`;
+  const element = document.querySelector(selector);
+  element.textContent = newValue;
+  element.setAttribute(key, newValue);
 }
 
 function start(rootComponent, rootHtml: HTMLElement): void {
