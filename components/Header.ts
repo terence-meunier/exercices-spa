@@ -5,9 +5,9 @@ import Title from './Title';
 
 // We want to render html like: 
 
-  //     <div class="w-full flex justify-center items-center border-2 bg-gray-300">
-  //       <Title type="h1" >HELLO WORLD</Title>
-  //     </div>
+//     <div class="w-full flex justify-center items-center border-2 bg-gray-300">
+//       <Title type="h1" >HELLO WORLD</Title>
+//     </div>
 
 class Header extends ε.Component {
 
@@ -20,7 +20,7 @@ class Header extends ε.Component {
         }
       ],
       [
-        ε.generate(Title, [], [])
+        ε.generate(Title, [], [], { texte: 'HELLO WORLD' })
       ]);
   }
 }

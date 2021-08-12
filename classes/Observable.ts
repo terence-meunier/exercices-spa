@@ -1,14 +1,12 @@
-import Observer from "./Observer";
-
 export default class Observable {
 
-    public observers: Observer[];
+    public observers: any;
 
     constructor() {
         this.observers = [];
     }
 
-    registerObserver(observer: Observer): number {
+    registerObserver(observer: any): number {
         this.observers.push(observer);
         return this.observers.length - 1;
     }
@@ -17,7 +15,7 @@ export default class Observable {
         this.observers.splice(index, 1);
     }
 
-    update(data: any) {
-        this.observers.forEach(observer => observer.update(data));
+    update(data) {
+        this.observers.forEach(observer => observer(data));
     }
 }

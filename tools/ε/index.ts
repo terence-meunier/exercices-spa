@@ -3,24 +3,30 @@ import { Element } from './frameworkTypes';
 // parent class for components
 abstract class Component {
   abstract render(): Element
+
+  setState(data) {
+    for (const [key, value] of Object.entries(data)) {
+      document.querySelector(`*[${key}="${this.states[key]}"]`).textContent = value;
+    }
+  }
 }
 
 function start(rootComponent, rootHtml: HTMLElement): void {
   rootHtml.appendChild(rootComponent);
 }
 
-function generate(tagName, attributes, children): Element {
+function generate(tagName, attributes, children, props?): Element {
   return (
     {
       tagName, attributes, children: children.reduce((acc, child) => {
         if (typeof child.tagName === 'function') {
-          const inst = new child.tagName();
+          const inst = new child.tagName(child.props);
           acc.push(inst.render());
         } else {
           acc.push(child);
         }
         return acc;
-      }, [])
+      }, []), props
     }
   )
 }
@@ -56,6 +62,12 @@ function ElementToHTML(element): HTMLElement {
     });
   }
 
+  if (element.props) {
+    for (const [key, value] of Object.entries(element.props)) {
+      elt.setAttribute(key, value);
+    }
+  }
+
   return elt;
 }
 
@@ -63,5 +75,5 @@ export {
   Component,
   generate,
   start,
-  ElementToHTML
+  ElementToHTML 
 };

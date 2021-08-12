@@ -1,9 +1,26 @@
 import * as ε from '../tools/ε/';
+import inputFieldObservable from '../tools/observables/inputFieldObservable';
 
 class Title extends ε.Component {
 
+  public states: string;
+
+  constructor(props) {
+    super();
+    this.states = props;
+  }
+
+  update(data) {
+    this.setState({texte: data});
+  }
+
   render() {
-    return ε.generate('h1', [{type: 'h1'}], ['HELLO WORLD'])
+
+    inputFieldObservable.registerObserver(data => {
+      this.update(data);
+    });
+
+    return ε.generate('h1', [{ type: 'h1' }], [this.states.texte], this.states);
   }
 }
 
