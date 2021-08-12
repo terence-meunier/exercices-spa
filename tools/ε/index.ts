@@ -6,9 +6,14 @@ abstract class Component {
 
   setState(data) {
     for (const [key, value] of Object.entries(data)) {
-      document.querySelector(`*[${key}="${this.states[key]}"]`).textContent = value;
+      const selector = `*[${key}="${this.states[key]}"]`;
+      reconciliation(selector, value);
     }
   }
+}
+
+function reconciliation(selector, value) {
+  document.querySelector(selector).textContent = value;
 }
 
 function start(rootComponent, rootHtml: HTMLElement): void {
